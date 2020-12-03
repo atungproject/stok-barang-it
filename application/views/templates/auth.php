@@ -25,6 +25,7 @@
             background-size: 80%;
         }
     </style>
+    <link href="<?= base_url(); ?>assets/img/stock.ico" rel="icon" type="image/gif"> 
 </head>
 
 
