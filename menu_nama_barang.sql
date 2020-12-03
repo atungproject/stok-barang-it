@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2020 at 04:08 AM
+-- Generation Time: Dec 04, 2020 at 12:33 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 5.6.39
 
@@ -25,6 +25,44 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `alokasi`
+--
+
+CREATE TABLE `alokasi` (
+  `id_alokasi` char(7) NOT NULL,
+  `dep` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `alokasi`
+--
+
+INSERT INTO `alokasi` (`id_alokasi`, `dep`) VALUES
+('A000001', 'TM Pelaihari'),
+('A000002', 'IT'),
+('A000003', 'MD Accounting'),
+('A000004', 'Accounting Cabang'),
+('A000005', 'Gudang Unit'),
+('A000006', 'Gudang Sparepart'),
+('A000007', 'TM 2 NAGA'),
+('A000008', 'TM Kuala Kurun'),
+('A000009', 'Direct Sales'),
+('A000010', 'Faktur'),
+('A000011', 'Marketing'),
+('A000012', 'Marketing Development'),
+('A000013', 'Marketing Communication'),
+('A000014', 'Marketing Corporate'),
+('A000015', 'Marketing Promotion'),
+('A000016', 'Direksi / BOD'),
+('A000017', 'Finance'),
+('A000018', 'General Affair'),
+('A000019', 'Pajak'),
+('A000020', 'TSD'),
+('A000021', 'Kasir Finance');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `barang`
 --
 
@@ -41,22 +79,22 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_barang`, `nama_barang`, `stok`, `satuan_id`, `jenis_id`) VALUES
-('B000001', 'KABEL NYM', 100, 7, 15),
-('B000002', 'Hikvision DS-7616NI-Q2/16P', 4, 5, 16),
-('B000003', 'Hikvision Outdoor', 5, 5, 12),
-('B000004', 'Hikvision Indoor', 21, 5, 12),
-('B000005', 'Hikvision DS-7608NI-Q2/8P', 1, 5, 16),
-('B000006', 'Hikvision DS-7608NI-Q1/8P', 1, 5, 16),
-('B000007', 'Hikvision DS-7604NI-Q1/4P', 1, 5, 16),
+('B000001', 'KABEL NYM', 90, 7, 15),
+('B000002', 'Hikvision DS-7616NI-Q2/16P', 3, 5, 16),
+('B000003', 'Hikvision Outdoor', 4, 5, 12),
+('B000004', 'Hikvision Indoor', 20, 5, 12),
+('B000005', 'Hikvision DS-7608NI-Q2/8P', 0, 5, 16),
+('B000006', 'Hikvision DS-7608NI-Q1/8P', 0, 5, 16),
+('B000007', 'Hikvision DS-7604NI-Q1/4P', 0, 5, 16),
 ('B000008', 'Escam Brick QD300', 7, 5, 12),
 ('B000009', 'Escam Brick QD500', 2, 5, 12),
-('B000010', 'Escam Warrior QD330', 1, 5, 12),
+('B000010', 'Escam Warrior QD330', 0, 5, 12),
 ('B000011', 'RAM CPU DRR3 12800 2GB', 1, 5, 35),
-('B000012', 'Hikvision DS-7616NI-Q1', 1, 5, 16),
+('B000012', 'Hikvision DS-7616NI-Q1', 0, 5, 16),
 ('B000013', 'PSU SIMBADDA 380W', 0, 5, 14),
 ('B000014', 'Hikvision DS-7608NI-Q1', 2, 5, 16),
-('B000015', 'BATERAI UPS', 3, 5, 36),
-('B000016', 'HDD WD CCTV 4TB', 4, 5, 37),
+('B000015', 'BATERAI UPS', 2, 5, 36),
+('B000016', 'HDD WD CCTV 4TB', 3, 5, 37),
 ('B000017', 'HDD CPU 500GB', 0, 5, 25);
 
 -- --------------------------------------------------------
@@ -70,21 +108,24 @@ CREATE TABLE `barang_keluar` (
   `user_id` int(11) NOT NULL,
   `barang_id` char(7) NOT NULL,
   `jumlah_keluar` int(11) NOT NULL,
-  `tanggal_keluar` date NOT NULL
+  `tanggal_keluar` date NOT NULL,
+  `alokasi_id` char(7) NOT NULL,
+  `ket` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `barang_keluar`
 --
 
-INSERT INTO `barang_keluar` (`id_barang_keluar`, `user_id`, `barang_id`, `jumlah_keluar`, `tanggal_keluar`) VALUES
-('T-BK-20112800000', 18, 'B000011', 1, '2020-11-28'),
-('T-BK-20112800001', 18, 'B000013', 1, '2020-11-28'),
-('T-BK-20112800002', 17, 'B000003', 2, '2020-11-28'),
-('T-BK-20112800003', 17, 'B000004', 3, '2020-11-28'),
-('T-BK-20120300000', 17, 'B000004', 2, '2020-12-03'),
-('T-BK-20120300001', 17, 'B000003', 1, '2020-12-03'),
-('T-BK-20120300002', 18, 'B000017', 1, '2020-12-03');
+INSERT INTO `barang_keluar` (`id_barang_keluar`, `user_id`, `barang_id`, `jumlah_keluar`, `tanggal_keluar`, `alokasi_id`, `ket`) VALUES
+('T-BK-20112800000', 18, 'B000011', 1, '2020-11-28', 'A000001', 'Counter'),
+('T-BK-20112800001', 18, 'B000013', 1, '2020-11-28', 'A000001', 'Admin'),
+('T-BK-20112800002', 17, 'B000003', 2, '2020-11-28', 'A000008', 'CCTV'),
+('T-BK-20112800003', 17, 'B000004', 3, '2020-11-28', 'A000008', 'CCTV'),
+('T-BK-20120300000', 17, 'B000004', 2, '2020-12-03', 'A000007', 'CCTV'),
+('T-BK-20120300001', 17, 'B000003', 1, '2020-12-03', 'A000007', 'CCTV'),
+('T-BK-20120300002', 18, 'B000017', 1, '2020-12-03', 'A000005', 'Laila'),
+('T-BK-20120300010', 21, 'B000012', 1, '2020-12-03', 'A000018', 'Nafis');
 
 --
 -- Triggers `barang_keluar`
@@ -259,11 +300,18 @@ INSERT INTO `user` (`id_user`, `nama`, `username`, `email`, `no_telp`, `role`, `
 (17, 'Catur Yuda Pratama', 'Catur', 'it.infrastucktur@triomotor.co.id', '085820626066', 'admin', '$2y$10$F/.wK5WqOqj7Zt0jTVoLqOf13ZlWxsR5HnGJimQYefQnmGQAf4gxO', 1605526280, '67642bcf45a6cac4c89a0b7fc5a6d7b2.png', 1),
 (18, 'Najib Epandi', 'najib', 'trio.it.hardware@triomotor.co.id', '0', 'admin', '$2y$10$qdR9gkQ6IFcsNV/Cwnb6Uue5P1Fym1o7d1/2f08fVw7qdaVV.XrR6', 1605526402, 'user.png', 1),
 (19, 'ahmad riyadi', 'riyadi', 'ahmad.riyadi@triomotor.co.id', '0', 'admin', '$2y$10$0eZveFeeTryYhBEmiYuJjO/og5v3gRWf5y2BCVvTeBYZUVCngAoQe', 1605526430, 'user.png', 1),
-(20, 'Haspiadi', 'haspiadi', 'trio.it.listrik@triomotor.co.id', '0', 'admin', '$2y$10$zgjJuQoiB/OHlnOzM97dFOnIiTDAEeGaFUK4YDHQxUD2PDi.AAUHi', 1605526866, 'user.png', 1);
+(20, 'Haspiadi', 'haspiadi', 'trio.it.listrik@triomotor.co.id', '0', 'admin', '$2y$10$zgjJuQoiB/OHlnOzM97dFOnIiTDAEeGaFUK4YDHQxUD2PDi.AAUHi', 1605526866, 'user.png', 1),
+(21, 'Teknisi', 'teknisi', 'teknisi@email.com', '081234567890', 'gudang', '$2y$10$fTQRadWHd3dQ1QKAgxdZe.13BscXcoVC5Q7QESykoo1O.lxS0m36a', 1607001906, 'user.png', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `alokasi`
+--
+ALTER TABLE `alokasi`
+  ADD PRIMARY KEY (`id_alokasi`);
 
 --
 -- Indexes for table `barang`
@@ -340,7 +388,7 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
