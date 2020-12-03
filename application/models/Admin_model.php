@@ -50,8 +50,6 @@ class Admin_model extends CI_Model
 
     public function getAlokasi()
     {
-        // $this->db->join('jenis j', 'b.jenis_id = j.id_jenis');
-        // $this->db->join('satuan s', 'b.satuan_id = s.id_satuan');
         $this->db->order_by('id_alokasi');
         return $this->db->get('alokasi a')->result_array();
     }

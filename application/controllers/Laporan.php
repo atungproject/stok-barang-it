@@ -89,7 +89,7 @@ class Laporan extends CI_Controller
                 $pdf->Cell(25, 7, $d['tanggal_keluar'], 1, 0, 'C');
                 $pdf->Cell(35, 7, $d['id_barang_keluar'], 1, 0, 'C');
                 $pdf->Cell(55, 7, $d['nama_barang'], 1, 0, 'L');
-                $pdf->Cell(45, 7, $d['nama'], 1, 0, 'L');
+                $pdf->Cell(45, 7, $d['dep'], 1, 0, 'L');
                 $pdf->Cell(25, 7, $d['jumlah_keluar'] . ' ' . $d['nama_satuan'], 1, 0, 'C');
                 $pdf->Ln();
             }

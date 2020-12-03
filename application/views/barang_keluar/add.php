@@ -79,13 +79,22 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <label class="col-md-4 text-md-right" for="alokasi_id">Alokasi Barang</label>
+                    <label class="col-md-4 text-md-right" for="ket">Alokasi</label>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <input value="<?= set_value('ket'); ?>" name="ket" id="ket" type="text" class="form-control" placeholder="Alokasi...">
+                        </div>
+                        <?= form_error('ket', '<small class="text-danger">', '</small>'); ?>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-4 text-md-right" for="alokasi_id">Departement</label>
                     <div class="col-md-5">
                         <div class="input-group">
                             <select name="alokasi_id" id="alokasi_id" class="custom-select">
                                 <option value="" selected disabled>Pilih Alokasi</option>
                                 <?php foreach ($alokasi as $a) : ?>
-                                    <option value="<?= $a['id_alokasi'] ?>"><?= $a['id_alokasi'] . ' | ' . $a['nama_alokasi'] ?></option>
+                                    <option value="<?= $a['id_alokasi'] ?>"><?= $a['id_alokasi'] . ' | ' . $a['dep'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <div class="input-group-append">

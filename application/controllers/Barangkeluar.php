@@ -23,10 +23,8 @@ class Barangkeluar extends CI_Controller
     {
         $this->form_validation->set_rules('tanggal_keluar', 'Tanggal Keluar', 'required|trim');
         $this->form_validation->set_rules('barang_id', 'Barang', 'required');
-        $this->form_validation->set_rules('alokasi_id', 'Alokasi', 'required');
 
         $input = $this->input->post('barang_id', true);
-        $input = $this->input->post('alokasi_id', true);
         $stok = $this->admin->get('barang', ['id_barang' => $input])['stok'];
         $stok_valid = $stok + 1;
 
@@ -46,6 +44,7 @@ class Barangkeluar extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data['title'] = "Barang Keluar";
             $data['barang'] = $this->admin->get('barang', null, ['stok >' => 0]);
+            $data['alokasi'] = $this->admin->get('alokasi');
 
             // Mendapatkan dan men-generate kode transaksi barang keluar
             $kode = 'T-BK-' . date('ymd');
